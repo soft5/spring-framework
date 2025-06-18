@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
+
     public static void main(String[] args) {
 ////        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("factoryBean.xml");
 ////        MyFactoryBean bean1 = (MyFactoryBean) ac.getBean( "&myFactoryBean");
@@ -57,7 +58,13 @@ public class Test {
 //        A a = new A();
 //        B b = new B();
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("test.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test.xml");
+        Student bean = context.getBean(Student.class);
+        context.close();
+
+        //想通过student获取其他bean对象怎么办？
+
+
 //        Teacher bean = context.getBean(Teacher.class);
 //        System.out.println(bean.getId());
 //        System.out.println(bean.getName());
@@ -65,6 +72,4 @@ public class Test {
 //        System.out.println(bean.getBeanFactory());
 
     }
-
-
 }

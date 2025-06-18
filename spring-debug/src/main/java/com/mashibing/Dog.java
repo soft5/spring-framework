@@ -4,15 +4,17 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 
-public class Student implements ApplicationContextAware, BeanFactoryAware {
+public class Dog implements ApplicationContextAware, BeanFactoryAware, EnvironmentAware {
 
     private int id;
     private String name;
 
     private ApplicationContext applicationContext;
     private BeanFactory beanFactory;
-
+    private Environment environment;
 
     public int getId() {
         return id;
@@ -34,9 +36,8 @@ public class Student implements ApplicationContextAware, BeanFactoryAware {
         return applicationContext;
     }
 
-    // set方法由谁在什么时候进行调用呢？
-    // 由容器来帮我们进行调用
-    // 给出一个统一的位置来进行调用即可，提供统一的接口，通过接口来进行判断
+    // 此方法必须要进行调用，此时才能给属性赋值，什么时候谁来调用此方法？必须由容器来进行调用，
+    // 能否让这些set方法在某一个固定的时候进行调用？定义统一的接口规范，在指定的步骤完成此功能
     public void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
@@ -47,5 +48,13 @@ public class Student implements ApplicationContextAware, BeanFactoryAware {
 
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
+    }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }
